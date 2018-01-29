@@ -82,11 +82,28 @@ namespace prog {
     }
 
 
-/*    Matrix4d Matrix4d::projectionMatrix()
-    {
+    //Finds the projection matrix
+    Matrix4d Matrix4d::projectionMatrix(float fov, float aspect, float near, float far)
+        {
+            //Calculate all the sides of the frustum
+            float top = tan(fov/2)*near;
+            float bottom = -top;
+            float right = top*aspect;
+            float left = -right;
 
-    }
-*/
+            Matrix4d proj;
+
+            //Create the projection matrix
+            proj.matrix.at(0) = (2*near)/(right-left);
+            proj.matrix.at(2) = (right+left)/(right-left);
+            proj.matrix.at(5) = (2*near)/(top-bottom);
+            proj.matrix.at(6) = (top+bottom)/(top-bottom);
+            proj.matrix.at(10) = -(far+near)/(far-near);
+            proj.matrix.at(11) = -(2*near*far)/(far-near);
+            proj.matrix.at(14) = -1;
+
+            return proj;
+        }
 
     //Returns the inverse of the matrix if there is one
     Matrix4d Matrix4d::inverseMatrix()

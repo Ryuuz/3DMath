@@ -18,7 +18,7 @@ namespace prog {
             void scale(float x = 1.0, float y = 1.0, float z = 1.0);
             void rotate(float angle, const Vector3d &axis);
             void translate(float x = 0.0, float y = 0.0, float z = 0.0);
-//            Matrix4d projectionMatrix();
+            Matrix4d projectionMatrix(float fov, float aspect, float near, float far);
             Matrix4d inverseMatrix();
 
             Matrix4d operator*(float scale);
